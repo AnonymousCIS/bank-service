@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@OpenAPIDefinition(info=@Info(title="파일 API"))
+@OpenAPIDefinition(info=@Info(title="은행 서비스", description = "계좌, 은행, 잔액 등 관리하는 서비스"))
 public class SwaggerConfig {
     
     @Bean
     public GroupedOpenApi apiGroup() {
         return GroupedOpenApi.builder()
-                .group("파일 API v1")
+                .group("은행 서비스 v1")
                 .pathsToMatch("/**")
                 .build();
     }
