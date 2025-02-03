@@ -21,5 +21,7 @@ public class TransactionsValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
 
+        if (errors.hasErrors()) return;
+
     }
 }

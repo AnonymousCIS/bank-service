@@ -29,6 +29,8 @@ public class BankValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
 
+        if (errors.hasErrors()) return;
+
         RequestBank form = (RequestBank) target;
 
         if (!memberUtil.isLogin()) throw new UnAuthorizedException();
