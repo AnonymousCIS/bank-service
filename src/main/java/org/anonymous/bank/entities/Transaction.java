@@ -16,7 +16,7 @@ public class Transaction extends BaseMemberEntity {
     private Long seq;
 
     // 지불 금액
-    @Column(nullable = false)
+    @Column(length = 15, nullable = false)
     private Long payAmount;
 
     // 지불 계좌

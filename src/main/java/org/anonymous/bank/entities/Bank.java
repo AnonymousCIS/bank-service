@@ -29,7 +29,7 @@ public class Bank extends BaseMemberEntity {
     private String accountNumber;
 
     // 계좌 비밀 번호
-    @Column(nullable = false)
+    @Column(length = 4, nullable = false)
     private String password;
 
     // 계좌 잔액
@@ -37,7 +37,7 @@ public class Bank extends BaseMemberEntity {
     private Long balance;
 
     // 예금주
-    @Column(nullable = false)
+    @Column(length = 30, nullable = false)
     private String name;
 
     // 거래 내역
