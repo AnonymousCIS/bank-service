@@ -13,7 +13,6 @@ import java.util.List;
  */
 @Data
 @Entity
-@IdClass(BankId.class)
 public class Bank extends BaseMemberEntity {
 
     @Id
@@ -21,11 +20,11 @@ public class Bank extends BaseMemberEntity {
     private Long seq;
 
     // 은행명
-    @Id
+    @Column(unique = true, nullable = false)
     private String bankName;
 
     // 계좌 번호
-    @Id
+    @Column(unique = true, nullable = false)
     private String accountNumber;
 
     // 계좌 비밀 번호
@@ -33,10 +32,9 @@ public class Bank extends BaseMemberEntity {
     private String password;
 
     // 계좌 잔액
-    @Transient
     private Long balance;
 
-    // 예금주
+    // 예금주 이름
     @Column(length = 30, nullable = false)
     private String name;
 

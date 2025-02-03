@@ -6,6 +6,7 @@ import lombok.Data;
 
 /**
  * 계좌 등록 양식
+ *
  */
 @Data
 public class RequestBank {
@@ -25,6 +26,7 @@ public class RequestBank {
     
     // 예금주
     @NotBlank
+    @Size(max = 30)
     private String name;
     
     // 계좌 비밀 번호

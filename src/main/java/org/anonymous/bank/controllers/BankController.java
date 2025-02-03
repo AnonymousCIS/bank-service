@@ -95,4 +95,17 @@ public class BankController {
 
         return new JSONData(data);
     }
+
+//    /**
+//     * 계좌 번호로 개별 공통 처리
+//     *
+//     * Base Method
+//     *
+//     * @param seq
+//     * @param mode
+//     */
+//    private void commonProcess(Long seq, String mode) {
+//
+//
+//    }
 }

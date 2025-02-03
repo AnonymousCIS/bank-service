@@ -21,6 +21,5 @@ public class Transaction extends BaseMemberEntity {
 
     // 지불 계좌
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "seq")
     private Bank bank;
 }
