@@ -68,7 +68,7 @@ public class SecurityConfig {
                    c.requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
 
                            // 나머지는 아무 인증, 미로그인도 접근 가능
-                           .anyRequest().permitAll();
+                           .anyRequest().authenticated();
                 });
 
 

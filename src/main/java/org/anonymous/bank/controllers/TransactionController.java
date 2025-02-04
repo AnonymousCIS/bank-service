@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.anonymous.bank.entities.Transaction;
 import org.anonymous.bank.services.transaction.TransactionInfoService;
 import org.anonymous.bank.services.transaction.TransactionsUpdateService;
-import org.anonymous.bank.validators.TransactionsValidator;
 import org.anonymous.global.exceptions.BadRequestException;
 import org.anonymous.global.libs.Utils;
 import org.anonymous.global.paging.ListData;
@@ -24,8 +23,6 @@ public class TransactionController {
 
     private final Utils utils;
 
-    private final TransactionsValidator validator;
-
     private final TransactionsUpdateService updateService;
 
     private final TransactionInfoService infosService;
@@ -37,8 +34,6 @@ public class TransactionController {
      */
     @PostMapping("/create")
     public JSONData create(@Valid @RequestBody RequestTransaction form, Errors errors) {
-
-        validator.validate(form, errors);
 
         if (errors.hasErrors()) throw new BadRequestException(utils.getErrorMessages(errors));
 

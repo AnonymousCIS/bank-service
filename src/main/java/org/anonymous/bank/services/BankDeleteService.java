@@ -17,8 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BankDeleteService {
 
-    private final Utils utils;
-
     private final BankInfoService infoService;
 
     private final BankRepository repository;
