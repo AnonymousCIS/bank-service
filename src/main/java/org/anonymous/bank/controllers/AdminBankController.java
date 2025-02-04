@@ -59,11 +59,11 @@ public class AdminBankController {
      */
     @DeleteMapping("/deletes")
     public JSONData deletes(@RequestParam("seq") List<Long> seqs) {
-
         List<Bank> data = bankDeleteService.deletes(seqs);
-
         return new JSONData(data);
     }
+
+    // 1. 거래내역 단일, 목록 일괄 삭제 -> 찐으로
 
     /**
      * 거래 내역 단일 | 목록 일괄 삭제 처리
@@ -72,9 +72,7 @@ public class AdminBankController {
      */
     @DeleteMapping("/transaction/deletes")
     public JSONData transactionDeletes(@RequestParam("seq") List<Long> seqs) {
-
         List<Transaction> data = transactionDeleteService.deletes(seqs);
-
         return new JSONData(data);
     }
 }

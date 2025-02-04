@@ -176,30 +176,32 @@ public class BankInfoService {
                 .limit(limit);
 
         /* 정렬 조건 처리 S */
-        String sort = search.getSort();
+        // String sort = search.getSort();
 
-        if (StringUtils.hasText(sort)) {
+        query.orderBy(bank.createdAt.desc());
 
-            // 0번째 : 필드명, 1번째 : 정렬 방향
-            String[] _sort = sort.split("_");
-
-            String field = _sort[0];
-
-            String direction = _sort[1];
-
-            if (field.equals("balance")) { // 계좌 잔액순 정렬
-
-                query.orderBy(direction.equalsIgnoreCase("DESC")
-                ? bank.balance.desc() : bank.balance.asc());
-
-            } else { // 기본 정렬 조건 - 최신순
-
-                query.orderBy(bank.createdAt.desc());
-            }
-        } else { // 기본 정렬 조건 - 최신순
-
-            query.orderBy(bank.createdAt.desc());
-        }
+//        if (StringUtils.hasText(sort)) {
+//
+//            // 0번째 : 필드명, 1번째 : 정렬 방향
+//            String[] _sort = sort.split("_");
+//
+//            String field = _sort[0];
+//
+//            String direction = _sort[1];
+//
+//            if (field.equals("balance")) { // 계좌 잔액순 정렬
+//
+//                query.orderBy(direction.equalsIgnoreCase("DESC")
+//                ? bank.balance.desc() : bank.balance.asc());
+//
+//            } else { // 기본 정렬 조건 - 최신순
+//
+//                query.orderBy(bank.createdAt.desc());
+//            }
+//        } else { // 기본 정렬 조건 - 최신순
+//
+//            query.orderBy(bank.createdAt.desc());
+//        }
         /* 정렬 조건 처리 E */
 
         List<Bank> items = query.fetch();
