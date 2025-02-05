@@ -40,7 +40,7 @@ public class AdminBankController {
      *
      * @return
      */
-    @PatchMapping("/bank/edit")
+    @PatchMapping("/edit")
     public JSONData edit(@Valid @RequestBody RequestBank form, Errors errors) {
 
         validator.validate(form, errors);
