@@ -66,7 +66,9 @@ public class SecurityConfig {
 
                     // 관리자 접근 가능 패턴
                    c.requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
-
+                           .requestMatchers("/apidocs.html",
+                                   "/swagger-ui/**",
+                                   "/api-docs/**").permitAll()
                            // 나머지는 아무 인증, 미로그인도 접근 가능
                            .anyRequest().authenticated();
                 });

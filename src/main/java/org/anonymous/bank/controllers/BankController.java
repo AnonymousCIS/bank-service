@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.anonymous.bank.entities.Bank;
@@ -29,6 +30,7 @@ import java.util.List;
  * 계좌 공용 기능
  *
  */
+@Tag(name = "Bank", description = "계좌 관리 API")
 @RestController
 @RequiredArgsConstructor
 public class BankController {
