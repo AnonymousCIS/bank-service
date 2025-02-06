@@ -1,5 +1,9 @@
 package org.anonymous.bank.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.anonymous.bank.entities.Bank;
@@ -40,6 +44,16 @@ public class AdminBankController {
      *
      * @return
      */
+    @Operation(summary = "계좌 단일 수정 처리", description = "계좌를 단일로 수정합니다.")
+    @Parameters({
+            @Parameter(name = "form", description = "계좌 작성 양식"),
+            @Parameter(name = "mode", description = "계좌 처리 모드", examples = {
+                    @ExampleObject(name = "add", value = "add"),
+                    @ExampleObject(name = "edit", value = "edit")
+            }),
+            @Parameter(name = "name", description = "예금주", required = true, example = "김철수"),
+            @Parameter(name = "password", description = "계좌 비밀 번호", required = true, example = "1125")
+    })
     @PatchMapping("/edit")
     public JSONData edit(@Valid @RequestBody RequestBank form, Errors errors) {
 
@@ -57,19 +71,21 @@ public class AdminBankController {
      *
      * @return
      */
+    @Operation(summary = "계좌 단일 & 목록 일괄 삭제 처리", description = "계좌 ID로 계좌를 단일 & 목록 일괄 삭제합니다.")
+    @Parameter(name = "seq", description = "계좌 ID", required = true, example = "1125")
     @DeleteMapping("/deletes")
     public JSONData deletes(@RequestParam("seq") List<Long> seqs) {
         List<Bank> data = bankDeleteService.deletes(seqs);
         return new JSONData(data);
     }
 
-    // 1. 거래내역 단일, 목록 일괄 삭제 -> 찐으로
-
     /**
      * 거래 내역 단일 | 목록 일괄 삭제 처리
      *
      * @return
      */
+    @Operation(summary = "거래 내역 단일 & 목록 일괄 삭제 처리", description = "거래 내역 ID로 거래 내역을 단일 & 목록 일괄 삭제합니다.")
+    @Parameter(name = "seq", description = "거래 내역 ID", required = true, example = "1125")
     @DeleteMapping("/transaction/deletes")
     public JSONData transactionDeletes(@RequestParam("seq") List<Long> seqs) {
         List<Transaction> data = transactionDeleteService.deletes(seqs);

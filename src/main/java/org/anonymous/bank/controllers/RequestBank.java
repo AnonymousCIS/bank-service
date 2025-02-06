@@ -3,6 +3,7 @@ package org.anonymous.bank.controllers;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.anonymous.bank.constants.BankName;
 
 /**
  * 계좌 등록 양식
@@ -18,7 +19,7 @@ public class RequestBank {
     
     // 은행명
     @NotBlank
-    private String bankName;
+    private BankName bankName;
     
     // 계좌 번호
     @NotBlank
