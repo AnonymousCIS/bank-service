@@ -1,6 +1,7 @@
 package org.anonymous.bank.controllers;
 
 import lombok.Data;
+import org.anonymous.bank.constants.BankName;
 import org.anonymous.global.paging.CommonSearch;
 
 import java.util.List;
@@ -12,5 +13,5 @@ public class BankSearch extends CommonSearch {
 
     private List<String> email;
 
-    private List<String> bankName;
+    private List<BankName> bankName;
 }

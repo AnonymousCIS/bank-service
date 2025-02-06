@@ -8,6 +8,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.anonymous.bank.constants.BankName;
 import org.anonymous.bank.controllers.TransactionSearch;
 import org.anonymous.bank.entities.Bank;
 import org.anonymous.bank.entities.QBank;
@@ -103,7 +104,7 @@ public class TransactionInfoService {
         QTransaction transaction = QTransaction.transaction;
 
         // 은행명별 검색
-        List<String> bankNames = search.getBankName();
+        List<BankName> bankNames = search.getBankName();
 
         if (bankNames != null && !bankNames.isEmpty()) {
 

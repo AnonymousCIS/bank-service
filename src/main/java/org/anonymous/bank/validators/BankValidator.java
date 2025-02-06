@@ -37,7 +37,7 @@ public class BankValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "bankName", "NotBlank");
 
-        String bankName = form.getBankName();
+        String bankName = form.getBankName().name();
 
         // 은행명에 숫자가 들어가거나 특수문자가 들어갈 경우
         if (bankName.matches(".*\\d.*") || bankName.matches(".*[^0-9a-zA-Zㄱ-ㅎ가-힣].*")) {
