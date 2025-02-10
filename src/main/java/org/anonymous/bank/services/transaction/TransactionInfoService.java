@@ -173,7 +173,7 @@ public class TransactionInfoService {
         andBuilder.and(transaction.payAmount.between(transactionLimitMin, transactionLimitMax));
 
         JPAQuery<Transaction> query = queryFactory.selectFrom(transaction)
-                .leftJoin(transaction.bank, bank)
+                .leftJoin(transaction.bank)
                 .fetchJoin()
                 .where(andBuilder)
                 .offset(offset)
