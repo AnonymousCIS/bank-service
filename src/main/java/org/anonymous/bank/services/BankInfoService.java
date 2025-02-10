@@ -170,7 +170,7 @@ public class BankInfoService {
         /* 검색 처리 E */
 
         JPAQuery<Bank> query = queryFactory.selectFrom(bank)
-                .leftJoin(bank.transactions, transaction)
+                .leftJoin(bank.transactions)
                 .fetchJoin()
                 .where(andBuilder)
                 .offset(offset)
