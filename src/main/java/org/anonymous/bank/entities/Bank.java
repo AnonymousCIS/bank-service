@@ -42,4 +42,8 @@ public class Bank extends BaseMemberEntity {
     @JsonIgnore
     @ToString.Exclude
     private List<Transaction> transactions;
+
+    public String getBankNameStr() {
+        return bankName == null ? "" : bankName.getTitle();
+    }
 }
