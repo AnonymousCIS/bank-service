@@ -1,10 +1,12 @@
 package org.anonymous.bank.controllers;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.anonymous.bank.constants.Category;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class RequestLoan {
 
 
