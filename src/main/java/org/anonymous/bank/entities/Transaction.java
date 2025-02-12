@@ -1,5 +1,6 @@
 package org.anonymous.bank.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.anonymous.global.entities.BaseMemberEntity;
@@ -9,6 +10,7 @@ import org.anonymous.global.entities.BaseMemberEntity;
  */
 @Data
 @Entity
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Transaction extends BaseMemberEntity {
 
     @Id
