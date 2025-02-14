@@ -1,7 +1,7 @@
 package org.anonymous.bank.controllers;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.anonymous.bank.constants.BankName;
@@ -11,7 +11,6 @@ import org.anonymous.bank.constants.BankName;
  *
  */
 @Data
-@JsonIgnoreProperties(ignoreUnknown=true)
 public class RequestBank {
     
     private Long seq;
@@ -20,7 +19,7 @@ public class RequestBank {
     private String mode;
     
     // 은행명
-    @NotBlank
+    @NotNull
     private BankName bankName;
     
     // 계좌 번호
