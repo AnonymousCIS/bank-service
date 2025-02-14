@@ -61,11 +61,13 @@ public class TransactionsUpdateService {
             return;
         }
 
-        Transaction transaction = new Transaction();
         List<Transaction> transactions = new ArrayList<>();
         Random random = new Random();
+        int test = random.nextInt(10);
+        System.out.println("test: " + test);
         for (Bank bank : banks) {
-            for (int i = 0; i < random.nextInt(10); i++) {
+            for (int i = 0; i < test; i++) {
+                Transaction transaction = new Transaction();
                 transaction.setBank(bank);
                 transaction.setPayAmount(random.nextLong(1000) * 300L);
                 transactions.add(transaction);
