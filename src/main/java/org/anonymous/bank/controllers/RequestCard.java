@@ -2,6 +2,7 @@ package org.anonymous.bank.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.anonymous.bank.constants.CardType;
 
@@ -13,7 +14,7 @@ public class RequestCard {
     @NotBlank
     private int annualFee; // 연회비는 받자. 근데 얘 한도 걸려있음.
 
-    @NotBlank
+    @NotNull
     private CardType cardType; // 카드종류
 
 }

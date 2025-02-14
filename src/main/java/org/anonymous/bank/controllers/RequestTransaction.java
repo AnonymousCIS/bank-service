@@ -2,6 +2,7 @@ package org.anonymous.bank.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.anonymous.bank.entities.Bank;
 
@@ -11,9 +12,8 @@ public class RequestTransaction {
 
     private Long seq;
 
-    @NotBlank
-    private Long payAmount;
+    private long payAmount;
 
-    @NotBlank
+    @NotNull
     private Bank bank;
 }
