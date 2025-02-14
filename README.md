@@ -23,7 +23,7 @@
 - 계좌 단일 생성
 
 ## 🔹 Swagger API 🔹
-- 링크 : https://cis-bank-service.koreait.xyz/apidocs.html
+- 링크 : https://cis-bank-service.onedu.blue/apidocs.html
 
   <img src="src/main/resources/images/swagger.png" width="1631" height="876" style="vertical-align: middle;">
 
