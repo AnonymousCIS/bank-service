@@ -246,7 +246,7 @@ public class BankController {
                     @ExampleObject(name = "법인신용", value = "CorporateCredit"),
             })
     })
-    @GetMapping("/transaction/card")
+    @PostMapping("/transaction/card")
     public JSONData transactionCard(@Valid @RequestBody RequestCard form, Errors errors) {
 
         cardValidator.validate(form, errors);
