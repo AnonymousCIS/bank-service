@@ -64,7 +64,6 @@ public class TransactionsUpdateService {
         List<Transaction> transactions = new ArrayList<>();
         Random random = new Random();
         int test = random.nextInt(10);
-        System.out.println("test: " + test);
         for (Bank bank : banks) {
             for (int i = 0; i < test; i++) {
                 Transaction transaction = new Transaction();

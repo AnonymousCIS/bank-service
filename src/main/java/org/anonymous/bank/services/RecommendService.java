@@ -63,7 +63,6 @@ public class RecommendService {
         // region API 전달
 
         String data = String.format("%s_%s_%s_%s_%s", annualFeeTarget, cardTypeTarget, checkMoneyTarget, bankNameTarget, categoryTarget);
-
         ResponseEntity<JSONData> item = addInfo("card-service", data);
 
         try {

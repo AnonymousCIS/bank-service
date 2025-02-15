@@ -110,17 +110,20 @@ public class Utils {
             // 개발 모드 - localhost 의 Service Url
             boolean isDev = StringUtils.hasText(profile) && profile.contains("dev");
 
+
             String serviceUrl = null;
 
             for (ServiceInstance instance : instances) {
 
                 String uri = instance.getUri().toString();
 
+
                 if (isDev && uri.contains("localhost")) {
 
                     serviceUrl = uri;
 
                 } else if (!isDev && !uri.contains("localhost")) {
+
 
                     serviceUrl = uri;
                 }
