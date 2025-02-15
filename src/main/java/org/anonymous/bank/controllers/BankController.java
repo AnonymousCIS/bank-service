@@ -276,7 +276,7 @@ public class BankController {
                     @ExampleObject(name = "담보대출", value = "MORTGAGELOAN"),
             })
     })
-    @GetMapping("/transaction/loan")
+    @PostMapping("/transaction/loan")
     public JSONData transactionLoan(@Valid @RequestBody RequestLoan form, Errors errors) {
 
         if (errors.hasErrors()) {
