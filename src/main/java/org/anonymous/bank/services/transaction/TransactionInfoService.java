@@ -166,7 +166,7 @@ public class TransactionInfoService {
         // 금액 처리
 
         Long transactionLimitMax = Objects.requireNonNullElse(search.getPayAmountMax(), 0L) > 0L ? search.getPayAmountMax() : 0L;
-        Long transactionLimitMin = Objects.requireNonNullElse(search.getPayAmountMin(), 0L) > 0L ? search.getPayAmountMax() : 0L;
+        Long transactionLimitMin = Objects.requireNonNullElse(search.getPayAmountMin(), 0L) > 0L ? search.getPayAmountMin() : 0L;
 
         transactionLimitMax = transactionLimitMax < 1 ? 100000000L : transactionLimitMax;
         transactionLimitMin = transactionLimitMin < 1 ? 0L : transactionLimitMin;
