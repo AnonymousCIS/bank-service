@@ -85,7 +85,7 @@ public class TransactionController {
             @Parameter(name="sopt", description = "검색옵션", example = "ALL"),
             @Parameter(name="skey", description = "검색키워드"),
             @Parameter(name="email", description = "이메일별로 검색"),
-            @Parameter(name = "bankName", description = "은행명", required = true, examples = {
+            @Parameter(name = "bankName", description = "은행명", examples = {
                     @ExampleObject(name = "한국은행", value = "HANKUK"),
                     @ExampleObject(name = "국민은행", value = "KB"),
                     @ExampleObject(name = "제일은행", value = "SC"),

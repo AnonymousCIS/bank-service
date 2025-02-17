@@ -170,7 +170,9 @@ public class TransactionInfoService {
         transactionLimitMax = transactionLimitMax < 1 ? 100000000L : transactionLimitMax;
         transactionLimitMin = transactionLimitMin < 1 ? 0 : transactionLimitMin;
 
-        andBuilder.and(transaction.payAmount.between(transactionLimitMin, transactionLimitMax));
+        // andBuilder.and(transaction.payAmount.between(transactionLimitMin, transactionLimitMax));
+        andBuilder.and(transaction.payAmount.goe(transactionLimitMin));
+        andBuilder.and(transaction.payAmount.loe(transactionLimitMax));
 
         JPAQuery<Transaction> query = queryFactory.selectFrom(transaction)
                 .leftJoin(transaction.bank)
