@@ -30,6 +30,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
 
 @Lazy
 @Service
@@ -164,11 +165,11 @@ public class TransactionInfoService {
         
         // 금액 처리
 
-        Long transactionLimitMax = search.getPayAmountMax() > 0 ? search.getPayAmountMax() : 0;
-        Long transactionLimitMin = search.getPayAmountMin() > 0 ? search.getPayAmountMax() : 0;
+        Long transactionLimitMax = Objects.requireNonNullElse(search.getPayAmountMax(), 0L) > 0L ? search.getPayAmountMax() : 0L;
+        Long transactionLimitMin = Objects.requireNonNullElse(search.getPayAmountMin(), 0L) > 0L ? search.getPayAmountMax() : 0L;
 
         transactionLimitMax = transactionLimitMax < 1 ? 100000000L : transactionLimitMax;
-        transactionLimitMin = transactionLimitMin < 1 ? 0 : transactionLimitMin;
+        transactionLimitMin = transactionLimitMin < 1 ? 0L : transactionLimitMin;
 
         // andBuilder.and(transaction.payAmount.between(transactionLimitMin, transactionLimitMax));
         andBuilder.and(transaction.payAmount.goe(transactionLimitMin));
