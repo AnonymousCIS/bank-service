@@ -15,6 +15,8 @@ import org.anonymous.global.exceptions.BadRequestException;
 import org.anonymous.global.libs.Utils;
 import org.anonymous.global.paging.ListData;
 import org.anonymous.global.rests.JSONData;
+import org.anonymous.member.MemberUtil;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +34,9 @@ public class TransactionController {
 
     private final TransactionsUpdateService updateService;
 
-    private final TransactionInfoService infosService;
+    private final TransactionInfoService infoService;
+
+    private final MemberUtil memberUtil;
 
     /**
      * 거래 내역 등록 처리
@@ -67,7 +71,7 @@ public class TransactionController {
     @GetMapping("/view/{seq}")
     public JSONData view(@PathVariable("seq") Long seq) {
 
-        Transaction data = infosService.get(seq);
+        Transaction data = infoService.get(seq);
 
         return new JSONData(data);
     }
@@ -77,7 +81,7 @@ public class TransactionController {
      *
      * @return
      */
-    @Operation(summary = "거래 내역 목록 조호", method="GET", description = "data - 조회된 거래목록, pagination - 페이징 기초 데이터")
+    @Operation(summary = "거래 내역 목록 조회", method="GET", description = "data - 조회된 거래목록, pagination - 페이징 기초 데이터")
     @ApiResponse(responseCode = "200")
     @Parameters({
             @Parameter(name="page", description = "페이지 번호", example = "1"),
@@ -117,7 +121,19 @@ public class TransactionController {
     @GetMapping("/list")
     public JSONData list(@ModelAttribute TransactionSearch search) {
 
-        ListData<Transaction> data = infosService.getList(search);
+        ListData<Transaction> data = new ListData<>();
+
+
+
+        String mode = search.getMode();
+        if (StringUtils.hasText(mode) && mode.equals("USER")) {
+            data = infoService.getMyList(search);
+        } else if (StringUtils.hasText(mode) && mode.equals("ADMIN") && memberUtil.isAdmin()) {
+            data = infoService.getList(search);
+        } else if (memberUtil.isAdmin()){
+            data = infoService.getList(search);
+        }
+
 
         return new JSONData(data);
     }

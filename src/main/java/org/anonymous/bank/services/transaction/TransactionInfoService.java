@@ -20,6 +20,7 @@ import org.anonymous.global.exceptions.BadRequestException;
 import org.anonymous.global.libs.Utils;
 import org.anonymous.global.paging.ListData;
 import org.anonymous.global.paging.Pagination;
+import org.anonymous.member.Member;
 import org.anonymous.member.MemberUtil;
 import org.aspectj.weaver.MemberUtils;
 import org.springframework.context.annotation.Lazy;
@@ -224,5 +225,26 @@ public class TransactionInfoService {
         Pagination pagination = new Pagination(page, (int)total, ranges, limit, request);
 
         return new ListData<>(items, pagination);
+    }
+
+
+    /**
+     * 현재 로그인한 회원이 작성한 게시글 목록 조회
+     *
+     * MyPage 에서 연동
+     *
+     * @param search
+     * @return
+     */
+    public ListData<Transaction> getMyList(TransactionSearch search) {
+
+        // 템플릿 출력시 오류 방지위한 빈 객체
+        if (!memberUtil.isLogin()) return new ListData<>(List.of(), null);
+
+        Member member = memberUtil.getMember();
+        String email = member.getEmail();
+        search.setEmail(List.of(email));
+
+        return getList(search);
     }
 }
