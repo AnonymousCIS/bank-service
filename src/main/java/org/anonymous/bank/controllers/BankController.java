@@ -21,6 +21,8 @@ import org.anonymous.global.exceptions.BadRequestException;
 import org.anonymous.global.libs.Utils;
 import org.anonymous.global.paging.ListData;
 import org.anonymous.global.rests.JSONData;
+import org.anonymous.member.MemberUtil;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +39,7 @@ public class BankController {
 
     private final Utils utils;
 
-
+    private final MemberUtil memberUtil;
     // region Bank Service
 
     private final BankValidator validator;
@@ -149,7 +151,18 @@ public class BankController {
     @GetMapping("/list")
     public JSONData list(@ModelAttribute BankSearch search) {
 
-        ListData<Bank> data = infoService.getList(search);
+        ListData<Bank> data = new ListData<>();
+
+
+
+        String mode = search.getMode();
+        if (StringUtils.hasText(mode) && mode.equals("USER")) {
+            data = infoService.getMyList(search);
+        } else if (StringUtils.hasText(mode) && mode.equals("ADMIN") && memberUtil.isAdmin()) {
+            data = infoService.getList(search);
+        } else if (memberUtil.isAdmin()){
+            data = infoService.getList(search);
+        }
 
         return new JSONData(data);
     }
@@ -179,55 +192,55 @@ public class BankController {
     // 4. 카드 추천. -> 연회비, 카드종류 2개만 선택, 그리고 bankName 자동으로. 한도는 얘가 썼던 금액을 보고. 카테고리는 자동으로.
     // 5. 대출 추천. -> 한도는 얘가 썼던 금액을 보고, bankName 자동, category 선택, 이자율 랜덤, 상환날짜 랜덤.
 
-    /**
-     * 거래내역 생성
-     * @param form
-     * @param errors
-     * @return
-     */
-    @Operation(summary = "거래 내역 생성", description = "신규 거래 내역을 생성합니다.")
-    @Parameters({
-            @Parameter(name = "form", description = "거래 내역 양식"),
-            @Parameter(name = "payAmount", description = "거래 금액", required = true, example = "20000"),
-            @Parameter(name = "bank", description = "결제 계좌", required = true)
-    })
-    @PostMapping("/transaction/create")
-    public JSONData transactionCreate(@Valid @RequestBody RequestTransaction form, Errors errors) {
-        if (errors.hasErrors()) throw new BadRequestException(utils.getErrorMessages(errors));
-        Transaction transaction = transactionsUpdateService.process(form);
-        return new JSONData(transaction);
-    }
-
-    /**
-     * 거래내역 단일 조회
-     * @param seq
-     * @return
-     */
-
-    @Operation(summary = "거래 내역 단일 조회", description = "거래 내역 ID로 거래 내역을 검색해 단일 조회합니다.")
-    @Parameter(name = "seq", description = "거래 내역 ID")
-    @GetMapping("/transaction/info/{seq}")
-    public JSONData transactionInfo(@PathVariable("seq") Long seq) {
-        Transaction transaction = transactionInfoService.get(seq);
-        return new JSONData(transaction);
-    }
-
-    /**
-     * 거래내역 목록 조회
-     * @param search
-     * @return
-     */
-    @Operation(summary = "거래 내역 목록 조회", description = "거래 내역 목록을 검색해 조회합니다.")
-    @Parameters({
-            @Parameter(name = "search", description = "거래 내역 목록 조회용"),
-            @Parameter(name = "payAmountMin", description = "가장 거래 금액이 낮은 조회용"),
-            @Parameter(name = "payAmountMax", description = "가장 거래 금액이 높은 조회용"),
-    })
-    @GetMapping("/transaction/list")
-    public JSONData transactionList(@ModelAttribute TransactionSearch search) {
-        ListData<Transaction> listData = transactionInfoService.getList(search);
-        return new JSONData(listData);
-    }
+//    /**
+//     * 거래내역 생성
+//     * @param form
+//     * @param errors
+//     * @return
+//     */
+//    @Operation(summary = "거래 내역 생성", description = "신규 거래 내역을 생성합니다.")
+//    @Parameters({
+//            @Parameter(name = "form", description = "거래 내역 양식"),
+//            @Parameter(name = "payAmount", description = "거래 금액", required = true, example = "20000"),
+//            @Parameter(name = "bank", description = "결제 계좌", required = true)
+//    })
+//    @PostMapping("/transaction/create")
+//    public JSONData transactionCreate(@Valid @RequestBody RequestTransaction form, Errors errors) {
+//        if (errors.hasErrors()) throw new BadRequestException(utils.getErrorMessages(errors));
+//        Transaction transaction = transactionsUpdateService.process(form);
+//        return new JSONData(transaction);
+//    }
+//
+//    /**
+//     * 거래내역 단일 조회
+//     * @param seq
+//     * @return
+//     */
+//
+//    @Operation(summary = "거래 내역 단일 조회", description = "거래 내역 ID로 거래 내역을 검색해 단일 조회합니다.")
+//    @Parameter(name = "seq", description = "거래 내역 ID")
+//    @GetMapping("/transaction/info/{seq}")
+//    public JSONData transactionInfo(@PathVariable("seq") Long seq) {
+//        Transaction transaction = transactionInfoService.get(seq);
+//        return new JSONData(transaction);
+//    }
+//
+//    /**
+//     * 거래내역 목록 조회
+//     * @param search
+//     * @return
+//     */
+//    @Operation(summary = "거래 내역 목록 조회", description = "거래 내역 목록을 검색해 조회합니다.")
+//    @Parameters({
+//            @Parameter(name = "search", description = "거래 내역 목록 조회용"),
+//            @Parameter(name = "payAmountMin", description = "가장 거래 금액이 낮은 조회용"),
+//            @Parameter(name = "payAmountMax", description = "가장 거래 금액이 높은 조회용"),
+//    })
+//    @GetMapping("/transaction/list")
+//    public JSONData transactionList(@ModelAttribute TransactionSearch search) {
+//        ListData<Transaction> listData = transactionInfoService.getList(search);
+//        return new JSONData(listData);
+//    }
 
     /**
      * 카드 추천

@@ -14,4 +14,5 @@ public class BankSearch extends CommonSearch {
     private List<String> email;
 
     private List<BankName> bankName;
+    private String mode;
 }
