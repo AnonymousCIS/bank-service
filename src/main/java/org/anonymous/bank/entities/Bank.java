@@ -23,7 +23,7 @@ public class Bank extends BaseMemberEntity {
     private Long seq;
 
     // 은행명
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private BankName bankName;
 
